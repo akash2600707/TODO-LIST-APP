@@ -31,7 +31,7 @@ useEffect(() => {
 
   
   // Fetch todos from an API
-  const fetchTodos = async () => {
+   const fetchTodos = async () => {
     try {
       const response = await fetch('https://jsonplaceholder.typicode.com/todos?_limit=4');
       const todos = await response.json();
@@ -43,12 +43,10 @@ useEffect(() => {
     }
   };
 
-  // Handle input change
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
 
-  // Add a new task
   const handleAddTask = async () => {
     if (inputValue.trim() === '') {
       return;
@@ -56,28 +54,16 @@ useEffect(() => {
 
     const newTask = {
       title: inputValue,
-      completed: false
+      completed: false,
+      id: tasks.length + 1, // Assigning a unique ID for locally added tasks
     };
 
-    try {
-      const response = await fetch('https://jsonplaceholder.typicode.com/todos', {
-        method: 'POST',
-        body: JSON.stringify(newTask),
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
-      });
-      const addedTask = await response.json();
-      setTasks((prevTasks) => [...prevTasks, addedTask]);
-      setInputValue('');
-      toast.success('Task added successfully');
-    } catch (error) {
-      console.log('Error adding task:', error);
-      toast.error('Error adding task');
-    }
+    // Update state to include both API tasks and locally added tasks
+    setTasks((prevTasks) => [...prevTasks, newTask]);
+    setInputValue('');
+    toast.success('Task added successfully');
   };
 
-  // Handle checkbox change for a task
   const handleTaskCheckboxChange = (taskId) => {
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
