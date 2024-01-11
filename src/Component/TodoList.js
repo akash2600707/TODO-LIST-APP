@@ -260,14 +260,8 @@ useEffect(() => {
       <FaLinkedin /> 
     </a>
 
-    <a href="https://github.com/yourusername">
+    <a href="https://github.com/akash2600707">
       <FaGithub /> 
-    </a>
-
-
-    <a href="https://twitter.com/yourusername">
-
-      <FaTwitter /> 
     </a>
   </p>   <div>
   <button
